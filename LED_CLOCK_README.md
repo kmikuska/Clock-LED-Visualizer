@@ -159,7 +159,7 @@ sudo journalctl -u led-clock.service -f
 ### LED Layout
 
 The 120 LEDs are arranged in a circle:
-- **LED 0** is at the top (12 o'clock position)
+- **LED 0** is at the bottom (6 o'clock position)
 - LEDs count clockwise around the circle
 - 120 LEDs = 2 LEDs per minute/second position
 
@@ -174,10 +174,10 @@ The 120 LEDs are arranged in a circle:
 ### Hour Markers
 
 Dim white LEDs appear at:
-- 12 o'clock (LED 0)
-- 3 o'clock (LED 30)
-- 6 o'clock (LED 60)
-- 9 o'clock (LED 90)
+- 12 o'clock (LED 60)
+- 3 o'clock (LED 90)
+- 6 o'clock (LED 0)
+- 9 o'clock (LED 30)
 
 ## Customization
 

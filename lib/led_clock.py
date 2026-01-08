@@ -16,7 +16,7 @@ class LedClock:
     Analog clock display on a circular LED strip
 
     Design for 120 LEDs:
-    - LEDs arranged in a circle (LED 0 at top, 12 o'clock position)
+    - LEDs arranged in a circle (LED 0 at bottom, 6 o'clock position)
     - Hour hand: Red
     - Minute hand: Green
     - Second hand: Blue
@@ -62,8 +62,9 @@ class LedClock:
         """
         # Calculate position as fraction of circle
         fraction = value / max_value
-        # Convert to LED position (0 is at top/12 o'clock)
-        position = int(fraction * self.led_count)
+        # Convert to LED position and add offset so LED 0 is at bottom (6 o'clock)
+        # The offset rotates the entire clock 180 degrees
+        position = int(fraction * self.led_count) + (self.led_count // 2)
         return position % self.led_count
 
     def _draw_hand(self, position, length, color, brightness=1.0):
@@ -95,10 +96,10 @@ class LedClock:
     def _draw_hour_markers(self):
         """Draw hour markers at 12, 3, 6, 9 positions"""
         marker_positions = [
-            0,                          # 12 o'clock
-            self.led_count // 4,        # 3 o'clock
-            self.led_count // 2,        # 6 o'clock
-            (self.led_count * 3) // 4   # 9 o'clock
+            self.led_count // 2,        # 12 o'clock (top)
+            (self.led_count * 3) // 4,  # 3 o'clock (right)
+            0,                          # 6 o'clock (bottom, LED 0)
+            self.led_count // 4         # 9 o'clock (left)
         ]
 
         for pos in marker_positions:
