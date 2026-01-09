@@ -132,6 +132,15 @@ except ImportError:
     logger.error("Could not import led_clock module. Make sure lib/led_clock.py exists.")
     sys.exit(1)
 
+# Try to import UserSettings for color configuration
+try:
+    from lib.usersettings import UserSettings
+    HAS_USER_SETTINGS = True
+except ImportError:
+    logger.info("UserSettings not available. Using default clock colors.")
+    HAS_USER_SETTINGS = False
+    UserSettings = None
+
 
 def parse_arguments():
     """Parse command line arguments"""
@@ -201,6 +210,15 @@ def main():
     logger.info("=" * 60)
 
     try:
+        # Try to load user settings for clock colors
+        usersettings = None
+        if HAS_USER_SETTINGS:
+            try:
+                usersettings = UserSettings()
+                logger.info("Loaded user settings for clock colors")
+            except Exception as e:
+                logger.warning(f"Could not load user settings: {e}")
+
         # Initialize LED strip
         led_strip = SimpleLedStrip(
             led_count=args.led_count,
@@ -208,8 +226,8 @@ def main():
             brightness=args.brightness
         )
 
-        # Initialize clock
-        clock = LedClock(led_strip, led_count=args.led_count)
+        # Initialize clock with optional user settings
+        clock = LedClock(led_strip, led_count=args.led_count, usersettings=usersettings)
 
         # Optional: Customize clock colors
         # clock.set_colors(

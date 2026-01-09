@@ -78,6 +78,19 @@
 	<adjacent_green>255</adjacent_green>
 	<adjacent_blue>255</adjacent_blue>
 
+	<!-- LED Clock Colors -->
+	<clock_hour_red>255</clock_hour_red>
+	<clock_hour_green>0</clock_hour_green>
+	<clock_hour_blue>0</clock_hour_blue>
+
+	<clock_minute_red>0</clock_minute_red>
+	<clock_minute_green>255</clock_minute_green>
+	<clock_minute_blue>0</clock_minute_blue>
+
+	<clock_second_red>0</clock_second_red>
+	<clock_second_green>0</clock_second_green>
+	<clock_second_blue>255</clock_second_blue>
+
 	<skipped_notes>None</skipped_notes>
 
 	<note_offsets>[[92, 2], [55, 1]]</note_offsets>

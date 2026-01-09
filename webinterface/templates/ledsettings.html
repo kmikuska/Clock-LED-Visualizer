@@ -342,6 +342,91 @@
             </div>
         </div>
 
+        <!-- LED Clock Colors -->
+        <div
+            class="col-span-12 sm:col-span-6 xl:col-span-6 glass shadow-glass-lg rounded-glass intro-y transition-smooth m-1">
+            <div class="w-full flex items-center p-3">
+                <div class="flex items-center space-x-2">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none" viewBox="0 0 24 24"
+                        stroke="currentColor">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <span class="font-semibold text-sm" data-translate="clock_colors">Clock Colors</span>
+                </div>
+            </div>
+            <div class="p-3 pt-0 space-y-3">
+                <!-- Hour Hand Color -->
+                <div>
+                    <label data-translate="clock_hour_color"
+                        class="block text-xs font-semibold mb-2 text-gray-600 dark:text-gray-400">Hour Hand</label>
+                    <div class="space-y-2">
+                        <input id="clock_hour_color" type="color" value="#ff0000"
+                            class="cursor-pointer h-8 w-full glass-light rounded-glass"
+                            oninput="editLedColor(event, 'clock_hour_');" onclick="editLedColor(event, 'clock_hour_');"
+                            onchange="change_setting('clock_hour_color', this.value);">
+                        <div id="clockhourcolors" class="justify-center flex">
+                            <span class="w-1/12 h-8 px-2 py-1 glass-light text-red-400 rounded-glass">R:</span>
+                            <input id="clock_hour_red" name="field_name" type="number" value="255" min="0" max="255"
+                                class="h-8 w-2/12 glass-light rounded-glass" onkeyup=enforceMinMax(this)>
+                            <span class="w-1/12 h-8 px-2 py-1 glass-light text-green-400 rounded-glass">G:</span>
+                            <input id="clock_hour_green" name="field_name" type="number" value="0" min="0" max="255"
+                                class="h-8 w-2/12 glass-light rounded-glass" onkeyup=enforceMinMax(this)>
+                            <span class="w-1/12 h-8 px-2 py-1 glass-light text-blue-400 rounded-glass">B:</span>
+                            <input id="clock_hour_blue" name="field_name" type="number" value="0" min="0" max="255"
+                                class="h-8 w-2/12 glass-light rounded-glass" onkeyup=enforceMinMax(this)>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Minute Hand Color -->
+                <div>
+                    <label data-translate="clock_minute_color"
+                        class="block text-xs font-semibold mb-2 text-gray-600 dark:text-gray-400">Minute Hand</label>
+                    <div class="space-y-2">
+                        <input id="clock_minute_color" type="color" value="#00ff00"
+                            class="cursor-pointer h-8 w-full glass-light rounded-glass"
+                            oninput="editLedColor(event, 'clock_minute_');" onclick="editLedColor(event, 'clock_minute_');"
+                            onchange="change_setting('clock_minute_color', this.value);">
+                        <div id="clockminutecolors" class="justify-center flex">
+                            <span class="w-1/12 h-8 px-2 py-1 glass-light text-red-400 rounded-glass">R:</span>
+                            <input id="clock_minute_red" name="field_name" type="number" value="0" min="0" max="255"
+                                class="h-8 w-2/12 glass-light rounded-glass" onkeyup=enforceMinMax(this)>
+                            <span class="w-1/12 h-8 px-2 py-1 glass-light text-green-400 rounded-glass">G:</span>
+                            <input id="clock_minute_green" name="field_name" type="number" value="255" min="0" max="255"
+                                class="h-8 w-2/12 glass-light rounded-glass" onkeyup=enforceMinMax(this)>
+                            <span class="w-1/12 h-8 px-2 py-1 glass-light text-blue-400 rounded-glass">B:</span>
+                            <input id="clock_minute_blue" name="field_name" type="number" value="0" min="0" max="255"
+                                class="h-8 w-2/12 glass-light rounded-glass" onkeyup=enforceMinMax(this)>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Second Hand Color -->
+                <div>
+                    <label data-translate="clock_second_color"
+                        class="block text-xs font-semibold mb-2 text-gray-600 dark:text-gray-400">Second Hand</label>
+                    <div class="space-y-2">
+                        <input id="clock_second_color" type="color" value="#0000ff"
+                            class="cursor-pointer h-8 w-full glass-light rounded-glass"
+                            oninput="editLedColor(event, 'clock_second_');" onclick="editLedColor(event, 'clock_second_');"
+                            onchange="change_setting('clock_second_color', this.value);">
+                        <div id="clocksecondcolors" class="justify-center flex">
+                            <span class="w-1/12 h-8 px-2 py-1 glass-light text-red-400 rounded-glass">R:</span>
+                            <input id="clock_second_red" name="field_name" type="number" value="0" min="0" max="255"
+                                class="h-8 w-2/12 glass-light rounded-glass" onkeyup=enforceMinMax(this)>
+                            <span class="w-1/12 h-8 px-2 py-1 glass-light text-green-400 rounded-glass">G:</span>
+                            <input id="clock_second_green" name="field_name" type="number" value="0" min="0" max="255"
+                                class="h-8 w-2/12 glass-light rounded-glass" onkeyup=enforceMinMax(this)>
+                            <span class="w-1/12 h-8 px-2 py-1 glass-light text-blue-400 rounded-glass">B:</span>
+                            <input id="clock_second_blue" name="field_name" type="number" value="255" min="0" max="255"
+                                class="h-8 w-2/12 glass-light rounded-glass" onkeyup=enforceMinMax(this)>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- Advanced Settings -->
         <div
             class="col-span-12 sm:col-span-6 xl:col-span-6 glass shadow-glass-lg rounded-glass intro-y transition-smooth m-1">

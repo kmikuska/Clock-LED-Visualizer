@@ -23,31 +23,67 @@ class LedClock:
     - Hour markers: Dim white at 12, 3, 6, 9 positions
     """
 
-    def __init__(self, led_strip, led_count=120):
+    def __init__(self, led_strip, led_count=120, usersettings=None):
         """
         Initialize LED clock
 
         Args:
             led_strip: LedStrip object from ledstrip.py
             led_count: Number of LEDs in the strip (default 120)
+            usersettings: Optional UserSettings object to load colors from config
         """
         self.strip = led_strip
         self.led_count = led_count
         self.running = False
+        self.usersettings = usersettings
 
         # Clock hand lengths (in number of LEDs from center)
         self.hour_hand_length = 5
         self.minute_hand_length = 8
         self.second_hand_length = 10
 
-        # Clock hand colors (R, G, B)
+        # Clock hand colors (R, G, B) - defaults
         self.hour_color = (255, 0, 0)      # Red
         self.minute_color = (0, 255, 0)    # Green
         self.second_color = (0, 0, 255)    # Blue
         self.marker_color = (30, 30, 30)   # Dim white
         self.background_color = (0, 0, 0)  # Black/off
 
+        # Load colors from settings if available
+        if self.usersettings:
+            self._load_colors_from_settings()
+
         logger.info(f"LED Clock initialized with {led_count} LEDs")
+
+    def _load_colors_from_settings(self):
+        """Load clock hand colors from user settings"""
+        try:
+            # Load hour hand color
+            hour_r = self.usersettings.get_setting_value("clock_hour_red")
+            hour_g = self.usersettings.get_setting_value("clock_hour_green")
+            hour_b = self.usersettings.get_setting_value("clock_hour_blue")
+            if hour_r is not None and hour_g is not None and hour_b is not None:
+                self.hour_color = (int(hour_r), int(hour_g), int(hour_b))
+                logger.info(f"Loaded hour hand color: {self.hour_color}")
+
+            # Load minute hand color
+            minute_r = self.usersettings.get_setting_value("clock_minute_red")
+            minute_g = self.usersettings.get_setting_value("clock_minute_green")
+            minute_b = self.usersettings.get_setting_value("clock_minute_blue")
+            if minute_r is not None and minute_g is not None and minute_b is not None:
+                self.minute_color = (int(minute_r), int(minute_g), int(minute_b))
+                logger.info(f"Loaded minute hand color: {self.minute_color}")
+
+            # Load second hand color
+            second_r = self.usersettings.get_setting_value("clock_second_red")
+            second_g = self.usersettings.get_setting_value("clock_second_green")
+            second_b = self.usersettings.get_setting_value("clock_second_blue")
+            if second_r is not None and second_g is not None and second_b is not None:
+                self.second_color = (int(second_r), int(second_g), int(second_b))
+                logger.info(f"Loaded second hand color: {self.second_color}")
+
+        except Exception as e:
+            logger.warning(f"Failed to load colors from settings: {e}")
 
     def _led_position_from_time(self, value, max_value):
         """
@@ -194,3 +230,13 @@ class LedClock:
             brightness: 0-100 percentage
         """
         self.strip.set_brightness(brightness)
+
+    def reload_colors_from_settings(self):
+        """
+        Reload clock hand colors from user settings
+        Useful for updating colors without recreating the clock object
+        """
+        if self.usersettings:
+            self._load_colors_from_settings()
+        else:
+            logger.warning("No user settings available to reload colors")

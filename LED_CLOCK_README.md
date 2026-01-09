@@ -181,9 +181,25 @@ Dim white LEDs appear at:
 
 ## Customization
 
+### Via Web Interface
+
+The easiest way to customize clock hand colors is through the web interface:
+
+1. Access the visualizer web interface (typically at `http://[raspberry-pi-ip]`)
+2. Navigate to **LED Settings** page
+3. Find the **Clock Colors** section
+4. Use the color pickers or RGB sliders to customize:
+   - **Hour Hand** (default: Red)
+   - **Minute Hand** (default: Green)
+   - **Second Hand** (default: Blue)
+5. Colors are automatically saved to `config/default_settings.xml`
+6. Restart the clock script to apply changes
+
+**Note:** The clock automatically loads colors from the configuration file if the `lib/usersettings` module is available.
+
 ### In Python Code
 
-You can customize the clock by modifying `neopixel_clock.py`:
+You can also customize the clock by modifying `neopixel_clock.py`:
 
 ```python
 # Change clock hand colors
@@ -200,6 +216,25 @@ Edit `lib/led_clock.py` to modify:
 - Hand lengths (`hour_hand_length`, `minute_hand_length`, `second_hand_length`)
 - Marker positions and colors
 - Animation behavior
+
+### Configuration File
+
+Colors are stored in `config/default_settings.xml`:
+
+```xml
+<!-- LED Clock Colors -->
+<clock_hour_red>255</clock_hour_red>
+<clock_hour_green>0</clock_hour_green>
+<clock_hour_blue>0</clock_hour_blue>
+
+<clock_minute_red>0</clock_minute_red>
+<clock_minute_green>255</clock_minute_green>
+<clock_minute_blue>0</clock_minute_blue>
+
+<clock_second_red>0</clock_second_red>
+<clock_second_green>0</clock_second_green>
+<clock_second_blue>255</clock_second_blue>
+```
 
 ## Troubleshooting
 
