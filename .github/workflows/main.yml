@@ -62,12 +62,12 @@ jobs:
           apt-get update && \
           apt-get upgrade -y && \
           apt-get install -y git wget python3-pip libopenblas-dev \
-            libatlas-base-dev libavahi-client-dev libasound2-dev \
+            libavahi-client-dev libasound2-dev \
             libusb-dev libdbus-1-dev libglib2.0-dev libudev-dev \
             libical-dev libreadline-dev fonts-freefont-ttf \
             libopenjp2-7 libtiff6 libjack0 libjack-dev autoconf \
             libtool make gcc build-essential scons swig abcmidi \
-            libasound2t64 libavahi-client3t64 libavahi-common3t64 && \
+            libasound2 libavahi-client3 libavahi-common3 && \
           systemctl mask ssh switch-root.service && \
           apt-get clean && \
           rm -rf /var/lib/apt/lists/*"
